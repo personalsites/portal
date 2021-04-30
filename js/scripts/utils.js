@@ -100,6 +100,7 @@
     const year = date.getFullYear();
 
     return `${day}.${month}.${year}`;
+    l
   }
 
   window._taxi_utils = {
