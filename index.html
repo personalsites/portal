@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>PortalTaxi2020</title>
@@ -29,14 +29,13 @@
     <script src="js/bootstrap-timepicker.min.js"></script>
     <script src="js/select1.min.js"></script>
     <script src="js/select2.min.js"></script>
-    <!-- <script src="js/typeahead.min.js"></script> -->
+    <script src="js/typeahead.min.js"></script>
     <script src="js/jquery.pwstrength.js"></script>
     <script src="js/jquery.easypiechart.min.js"></script>
     <script src="js/jquery.easypiechart.min.js"></script>
     <!--<script src="js/ckeditor/ckeditor.js"></script>-->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script src="js/xlsx-populate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
 
     <link
       rel="stylesheet"
@@ -71,10 +70,6 @@
         height: 100%;
         margin: 0;
         padding: 0;
-      }
-
-      .btn {
-        padding: 6px 12px;
       }
 
       #floating-panel {
@@ -175,10 +170,6 @@
         padding-left: 10px;
         list-style: none;
       }
-
-      .phone-error-text {
-        margin-top: 5px;
-      }
     </style>
     <script>
       $(document).ready(function () {
@@ -193,11 +184,10 @@
       src="https://api-maps.yandex.ru/2.1/?apikey=30cb04af-aa04-428b-9d17-d9dc8fce1686&lang=ru-Ru"
       type="text/javascript"
     ></script>
-    <!-- <script src="js/scripts/constants.js"></script>
+    <script src="js/scripts/constants.js"></script>
     <script src="js/scripts/utils.js"></script>
     <script src="js/scripts/main-script.js"></script>
-    <script src="js/scripts/TableBuilder.js"></script> -->
-    <script src="bundle.min.js"></script>
+    <script src="js/scripts/TableBuilder.js"></script>
   </head>
 
   <body>
@@ -224,14 +214,14 @@
           </div>
           <div class="modal-body"></div>
           <div class="modal-footer">
-            <!-- <button
+            <button
               id="close_1"
               type="button"
               class="btn btn-default"
               data-dismiss="modal"
             >
               Закрыть
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
@@ -273,6 +263,7 @@
           <div class="mouth"></div>
         </div>
       </div>
+      <div class ="loaderText"><b>Идет загрузка, подождите...</b></div>
     </div>
 
     <div class="page-wrapper container nav-small hidden">
@@ -284,7 +275,7 @@
                 id="user-left-box"
                 class="clearfix hidden-sm hidden-xs dropdown profile2-dropdown"
               >
-                <img alt="" src="img/samples/scarlet-159.png" />
+                <img alt="" src="img/scarlet-159.png" />
                 <div class="user-box">
                   <span class="name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -483,8 +474,7 @@
         </p>
       </footer>
     </div>
-  <script  src="bundle.min.c307debd.js"></script>
-</body>
+  </body>
 
   <script src="js/demo-skin-changer.js"></script>
 
