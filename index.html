@@ -1,0 +1,502 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>PortalTaxi2020</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, user-scalable=no"
+      charset="utf-8"
+    />
+    <!--
+    Скрипты
+    -->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/lodash.custom.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.nanoscroller.min.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/jquery.nestable.js"></script>
+    <script src="js/summernote.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/modalEffects.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/pace.min.js"></script>
+    <script src="js/jquery.maskedinput.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/daterangepicker.js"></script>
+    <script src="js/bootstrap-timepicker.min.js"></script>
+    <script src="js/select1.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <!-- <script src="js/typeahead.min.js"></script> -->
+    <script src="js/jquery.pwstrength.js"></script>
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <!--<script src="js/ckeditor/ckeditor.js"></script>-->
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="js/xlsx-populate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/bootstrap/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/loader.css" />
+    <link rel="stylesheet" type="text/css" href="css/libs/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="css/libs/nanoscroller.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/compiled/theme_styles.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/libs/summernote.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/libs/nifty-component.css"
+    />
+    <link rel="stylesheet" href="css/libs/select2.css" type="text/css" />
+    <link rel="stylesheet" href="css/libs/select1.css" type="text/css" />
+    <link
+      rel="icon"
+      href="https://static.beeline.ru/upload/images/favicon.png"
+      type="image/png"
+    />
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .btn {
+        padding: 6px 12px;
+      }
+
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #cke_pasteTimeTableEditor,
+      #cke_routeSheets {
+        z-index: 2;
+        display: none;
+        position: absolute;
+        top: 10px;
+        width: 90%;
+      }
+
+      #timeSelectorModal {
+        display: none;
+        position: absolute;
+        top: 10px;
+        color: black;
+      }
+
+      .car-fill-progress-window {
+        position: absolute;
+        top: 10px;
+        z-index: 0;
+        display: none;
+      }
+
+      #config-tool-cog {
+        display: none;
+      }
+
+      #cke_inner {
+        display: none;
+      }
+
+      .mymap {
+        width: auto;
+        height: 100%;
+      }
+
+      .page-wrapper {
+        position: relative;
+      }
+
+      #footer-bar {
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .radio label:before {
+        top: -2px;
+      }
+      .radio label:after {
+        top: 0px;
+      }
+
+      .remove-route img {
+        width: 18px;
+        height: 18px;
+      }
+
+      .cluster-item-add-to-route-sheet {
+        display: flex;
+        align-items: center;
+      }
+
+      .cluster-item-add-to-route-sheet input,
+      .cluster-item-add-to-route-sheet label {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .cluster-item-add-to-route-sheet label {
+        margin-left: 10px;
+        font-size: 14px;
+      }
+
+      .cluster-item-add-to-route-sheet input:hover,
+      .cluster-item-add-to-route-sheet label:hover {
+        cursor: pointer;
+      }
+
+      .cluster-list {
+        padding-top: 5px;
+        padding-left: 10px;
+        list-style: none;
+      }
+
+      .phone-error-text {
+        margin-top: 5px;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        const mapElement = $("#map");
+        // 50px - height of header
+        // 37px - height of footer
+        // 15px top padding of content wrapper
+        mapElement.css("height", window.innerHeight - 50 - 37 - 15);
+      });
+    </script>
+    <script
+      src="https://api-maps.yandex.ru/2.1/?apikey=30cb04af-aa04-428b-9d17-d9dc8fce1686&lang=ru-Ru"
+      type="text/javascript"
+    ></script>
+    <!-- <script src="js/scripts/constants.js"></script>
+    <script src="js/scripts/utils.js"></script>
+    <script src="js/scripts/main-script.js"></script>
+    <script src="js/scripts/TableBuilder.js"></script> -->
+    <script src="bundle.min.js"></script>
+  </head>
+
+  <body>
+    <div
+      class="modal fade"
+      id="modal-message"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <!-- <button
+              id="close_1"
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+            >
+              Закрыть
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="theme-wrapper">
+      <header class="navbar" id="header-navbar">
+        <div class="container">
+          <a href="index.html" id="logo" class="navbar-brand">
+            <img src="img/logo.png" alt="" class="normal-logo logo-white" />
+            <img
+              src="img/logo-black.png"
+              alt=""
+              class="normal-logo logo-black"
+            />
+            <img
+              src="img/logo-small.png"
+              alt=""
+              class="small-logo hidden-xs hidden-sm hidden"
+            />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <div class="loader">
+      <div class="track">
+        <div class="mouse"></div>
+      </div>
+      <div class="face">
+        <div class="ears-container"></div>
+        <div class="eyes-container">
+          <div class="eye"></div>
+          <div class="eye"></div>
+        </div>
+        <div class="phiz">
+          <div class="nose"></div>
+          <div class="lip"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-wrapper container nav-small hidden">
+      <div class="row">
+        <div id="nav-col">
+          <section id="col-left" class="col-left-nano">
+            <div id="col-left-inner" class="col-left-nano-content">
+              <div
+                id="user-left-box"
+                class="clearfix hidden-sm hidden-xs dropdown profile2-dropdown"
+              >
+                <img alt="" src="img/samples/scarlet-159.png" />
+                <div class="user-box">
+                  <span class="name">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Jennifer L.
+                      <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="user-profile.html"
+                          ><i class="fa fa-user"></i>Profile</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-cog"></i>Settings</a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-envelope-o"></i>Messages</a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-power-off"></i>Logout</a>
+                      </li>
+                    </ul>
+                  </span>
+                  <span class="status">
+                    <i class="fa fa-circle"></i> Online
+                  </span>
+                </div>
+              </div>
+
+              <div
+                class="collapse navbar-collapse navbar-ex1-collapse"
+                id="sidebar-nav"
+              >
+                <ul class="nav nav-pills nav-stacked">
+                  <li
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Таблица"
+                  >
+                    <a id="viewEditorBtn" href="#0">
+                      <i class="fa fa-table"></i>
+                    </a>
+                  </li>
+                  <li
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Поиск машины"
+                  >
+                    <a id="viewTimeSelectorBtn" href="#0">
+                      <i class="fa fa-car"></i>
+                    </a>
+                  </li>
+                  <!--<li>-->
+                  <!--<a id="viewRouteSheets" href="#0">-->
+                  <!--<i class="fa fa-copy"></i>-->
+                  <!--</a>-->
+                  <!--</li>-->
+                  <li
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Выгрузить в Excel"
+                  >
+                    <a id="download" href="#0">
+                      <i class="fa fa-download"></i>
+                    </a>
+                  </li>
+                  <li
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Сбросить текущий маршрут"
+                  >
+                    <a class="remove-route" id="cancelRoute" href="#0">
+                      <img src="./img/eraser.svg" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <div id="nav-col-submenu"></div>
+        </div>
+        <div id="content-wrapper">
+          <div id="map" class="mymap"></div>
+          <textarea
+            class="form-control ckeditor"
+            id="pasteTimeTableEditor"
+            rows="3"
+          ></textarea>
+          <textarea
+            class="form-control ckeditor"
+            id="routeSheets"
+            rows="3"
+          ></textarea>
+          <div style="display: none" id="floating-panel">
+            <input id="address" type="textbox" value="Пермь, Пушкрская 100" />
+            <input
+              id="address1"
+              type="textbox"
+              value="Пермь, Екатеринская, 214 9822500131"
+            />
+            <input id="submit" type="button" value="Geocode" />
+          </div>
+          <div
+            id="timeSelectorModal"
+            style="box-shadow: 3px 3px 3px black"
+            class="main-box infographic-box colored gray-bg font-size: 100px"
+          >
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col-xs-6" style="padding-right: 10px">
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label>Время:</label>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          name="time"
+                          id="time1"
+                          value="22:00"
+                          checked=""
+                        />
+                        <label for="time1">22:00</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          name="time"
+                          id="time2"
+                          value="23:00"
+                        />
+                        <label for="time2">23:00</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          name="time"
+                          id="time3"
+                          value="00:00"
+                        />
+                        <label for="time3">00:00</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          name="time"
+                          id="time4"
+                          value="01:00"
+                        />
+                        <label for="time4">01:00</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          name="time"
+                          id="time5"
+                          value="02:00"
+                        />
+                        <label for="time5">02:00</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button id="send" type="submit" class="btn btn-success pull-right">
+              Начать поиск...
+            </button>
+          </div>
+
+          <div
+            id="add-box"
+            style="box-shadow: 3px 3px 3px black(10, 10, 10)"
+            class="main-box infographic-box colored gray-bg car-fill-progress-window"
+          >
+            <div class="project-box">
+              <div class="project-box-content">
+                <span class="chart" data-percent="0">
+                  <span class="percent">0</span>%<br />
+                  <span class="lbl">completed</span>
+                  <canvas height="130" width="130"></canvas>
+                </span>
+              </div>
+            </div>
+
+            <button id="add" type="submit" class="btn btn-success pull-right">
+              Поехали...
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer id="footer-bar" class="row">
+        <p id="footer-copyright" class="col-xs-12">
+          Билайн <sub>taxi</sub> 2020 by
+          <a href="mailto:OMaer@kaluga.beeline.ru">OMaer</a>
+        </p>
+      </footer>
+    </div>
+  <script  src="bundle.min.c307debd.js"></script>
+</body>
+
+  <script src="js/demo-skin-changer.js"></script>
+
+  <!--<script src="js/demo-skin-changer.js"></script>-->
+
+  <!--  кнопка для выгрузки данных в excel
+    
+    $('.download').on('click', function(){
+    var link = document.createElement('a');
+    link.setAttribute('href', '/download.png');
+    link.setAttribute('download', 'download.png');
+    link.click();
+    return false;
+    });
+--></html>
