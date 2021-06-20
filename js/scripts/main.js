@@ -872,7 +872,7 @@ function onDocumentReady() {
         //   window.navigator.msSaveOrOpenBlob(blob, "Маршрутные листы.xlsx");
         // } else {
         const today = new Date();
-        const fileName = `НОВЫЙ ЛИСТ ЗАКАЗА${getFullDate(today)}.xlsx`;
+        const fileName = `НОВЫЙ ЛИСТ ЗАКАЗА ${getFullDate(today)}.xlsx`;
 
         const url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
