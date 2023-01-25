@@ -1,6 +1,7 @@
 var markers = [],
     map,
     geocoder,
+    
     haightAshbury,
     nach,
     index,
