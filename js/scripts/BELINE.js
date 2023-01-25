@@ -2,7 +2,6 @@ ymaps.ready(init);
 
 var myMap,
 myPlacemark,
-
 cpk,
 ic,
 directionsService,
